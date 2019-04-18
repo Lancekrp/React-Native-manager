@@ -57,4 +57,4 @@ buck-out/
 
 
 #secret keys
-.env
+firebaseConfig.js
