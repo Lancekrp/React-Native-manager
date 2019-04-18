@@ -46,9 +46,6 @@ class LoginForm extends Component {
   render() {
     return (
       <Card>
-        <Header headerText="Authentication">
-          Login Form
-        </Header>
         <CardSection>
           <Input
             label="Email"
