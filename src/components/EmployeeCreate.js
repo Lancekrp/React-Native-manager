@@ -3,12 +3,14 @@ import { Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { employeeUpdate, employeeCreate } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
+import CurrentDay from './CurrentDay';
 
 class EmployeeCreate extends Component {
+
   onButtonPress() {
     const { name, phone, shift } = this.props;
 
-    this.props.employeeCreate({ name, phone, shift });
+    this.props.employeeCreate({ name, phone, shift: shift || CurrentDay() });
   }
 
   render() {
