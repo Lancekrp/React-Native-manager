@@ -1,7 +1,8 @@
 import firebase from '@firebase/app';
 import '@firebase/auth';
 import '@firebase/firestore';
-import { EMPLOYEE_UPDATE } from './types';
+import { Actions } from 'react-native-router-flux';
+import { EMPLOYEE_UPDATE, EMPLOYEE_CREATE } from './types';
 
 export const employeeUpdate = ({ prop, value}) => {
   return {
@@ -13,7 +14,13 @@ export const employeeUpdate = ({ prop, value}) => {
 export const employeeCreate = ({ name, phone, shift }) => {
   const { currentUser } = firebase.auth();
 
+  return (dispatch) => {
   firebase.firestore()
     .collection(`/users/${currentUser.uid}/employees`)
-    .add({ name, phone, shift });
+    .add({ name, phone, shift })
+    .then(() => {
+      dispatch({ type: EMPLOYEE_CREATE });
+      Actions.employeeList({ type: 'reset' })
+    });
+  };
 };
