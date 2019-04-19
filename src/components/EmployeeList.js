@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListView, View, Text } from 'react-native';
@@ -16,13 +17,14 @@ class EmployeeList extends Component {
 
   createDataSource({ employees }) {
     const ds = new ListView.DataSource({
-      rowHasChanged: {r1, r2} => r1 != r2
+      rowHasChanged: (r1, r2) => r1 != r2
     });
 
-    this.dataSource = ds.cloneWithRows(this.props.employees);
+    this.dataSource = ds.cloneWithRows(employees);
   }
 
   render() {
+    console.log(this.props);
     return (
       <View>
         <Text>Employee List</Text>
@@ -37,9 +39,10 @@ class EmployeeList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    employees: state.employees
-  }
+  const employees = _.map(state.employees, (val, uid) => {
+    return { ...val, uid };
+  });
+  return { employees };
 };
 
 export default connect(mapStateToProps, { employeesFetch })(EmployeeList);
