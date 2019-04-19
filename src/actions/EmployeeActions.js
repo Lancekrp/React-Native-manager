@@ -1,3 +1,6 @@
+import firebase from '@firebase/app';
+import '@firebase/auth';
+import '@firebase/firestore';
 import { EMPLOYEE_UPDATE } from './types';
 
 export const employeeUpdate = ({ prop, value}) => {
@@ -8,5 +11,9 @@ export const employeeUpdate = ({ prop, value}) => {
 };
 
 export const employeeCreate = ({ name, phone, shift }) => {
-  console.log(name, phone, shift);
+  const { currentUser } = firebase.auth();
+
+  firebase.firestore()
+    .collection(`/users/${currentUser.uid}/employees`)
+    .add({ name, phone, shift });
 };

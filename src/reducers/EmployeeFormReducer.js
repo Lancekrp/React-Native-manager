@@ -1,13 +1,6 @@
 import { EMPLOYEE_UPDATE } from '../actions/types';
 import CurrentDay from '../components/CurrentDay';
 
-// const currentDay = () => {
-//   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-//   const day =  new Date();
-
-//   return daysOfWeek[day.getDay()];
-// };
-
 const INITIAL_STATE = {
   name: '',
   phone: '',
